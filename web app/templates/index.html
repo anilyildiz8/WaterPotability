@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Potability Prediction</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 600px;
+            margin-top: 50px;
+        }
+        .card {
+            padding: 20px;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        .potable {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .not-potable {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h2 class="text-center">Water Potability Prediction</h2>
+            <form action="/predict" method="post">
+                <div class="form-group">
+                    <label for="ph">pH</label>
+                    <input type="text" class="form-control" id="ph" name="ph" required>
+                </div>
+                <div class="form-group">
+                    <label for="hardness">Hardness</label>
+                    <input type="text" class="form-control" id="hardness" name="hardness" required>
+                </div>
+                <div class="form-group">
+                    <label for="solids">Solids</label>
+                    <input type="text" class="form-control" id="solids" name="solids" required>
+                </div>
+                <div class="form-group">
+                    <label for="chloramines">Chloramines</label>
+                    <input type="text" class="form-control" id="chloramines" name="chloramines" required>
+                </div>
+                <div class="form-group">
+                    <label for="sulfate">Sulfate</label>
+                    <input type="text" class="form-control" id="sulfate" name="sulfate" required>
+                </div>
+                <div class="form-group">
+                    <label for="conductivity">Conductivity</label>
+                    <input type="text" class="form-control" id="conductivity" name="conductivity" required>
+                </div>
+                <div class="form-group">
+                    <label for="organic_carbon">Organic Carbon</label>
+                    <input type="text" class="form-control" id="organic_carbon" name="organic_carbon" required>
+                </div>
+                <div class="form-group">
+                    <label for="trihalomethanes">Trihalomethanes</label>
+                    <input type="text" class="form-control" id="trihalomethanes" name="trihalomethanes" required>
+                </div>
+                <div class="form-group">
+                    <label for="turbidity">Turbidity</label>
+                    <input type="text" class="form-control" id="turbidity" name="turbidity" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Predict</button>
+            </form>
+            {% if prediction_text %}
+                <div class="result {% if 'Potable' in prediction_text %}potable{% else %}not-potable{% endif %}">
+                    <h4 class="text-center">{{ prediction_text }}</h4>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
